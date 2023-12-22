@@ -1,0 +1,48 @@
+name: Main Branch CI/CD
+
+
+on:
+
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.x
+
+
+      - name: Install dependencies
+        run: make dev
+      - name: Fix Format
+        run: make format-fix
+      - name: Complexity scan
+        run: make complex
+      - name: Unit tests
+        run: make unit
+      - name: Run Coverage
+        run: make coverage-tests
+      - name: Set up AWS credentials
+        run: |
+          mkdir -p ~/.aws
+          touch ~/.aws/credentials
+          echo "[your-aws-profile]
+          aws_access_key_id = $AWS_ACCESS_KEY_ID
+          aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" > ~/.aws/credentials
+        env:
+          AWS_ACCESS_KEY_ID: {% raw %}${{ secrets['AWS_ACCESS_KEY_ID'] }}{% endraw %}
+          AWS_SECRET_ACCESS_KEY: {% raw %}${{ secrets['AWS_SECRET_ACCESS_KEY'] }}{% endraw %}
+
+
+      - name: Deploy to AWS
+        run: make deploy
+        env:
+          AWS_PROFILE: your-aws-profile

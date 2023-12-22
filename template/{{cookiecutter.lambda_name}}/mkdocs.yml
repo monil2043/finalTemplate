@@ -1,0 +1,58 @@
+site_name: Lambda for Backends
+site_description: AWS Lambda to invoke REST API backends
+site_author: Jyoti Rathi
+repo_url: https://github.com/ContactCenterOnAWS/{{cookiecutter.service_name}}
+edit_uri: edit/main/docs
+
+nav:
+  - Homepage: index.md
+  - Getting Started: getting_started.md
+
+theme:
+  name: material
+  font:
+    text: Ubuntu
+  palette:
+    - scheme: default
+      primary: blue
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.instant
+    - navigation.indexes
+    - navigation.tracking
+    - content.code.annotate
+
+markdown_extensions:
+  - admonition
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path: "."
+      check_paths: true
+  - meta
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - attr_list
+  - pymdownx.emoji
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+copyright: Copyright &copy; 2023 Contact Center on AWS.
+
+plugins:
+  - git-revision-date
+  - search
+extra_css:
+  - stylesheets/extra.css
+

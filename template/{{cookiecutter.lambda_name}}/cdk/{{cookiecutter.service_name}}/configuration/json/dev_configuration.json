@@ -1,0 +1,26 @@
+{
+    "features": {
+        "feature1": {
+            "default": false,
+            "rules": {
+                "enable feature 1 when a given key has a specified value": {
+                    "when_match": true,
+                    "conditions": [
+                        {
+                            "action": "EQUALS",
+                            "key": "customer_name",
+                            "value": "Good Customer"
+                        }
+                    ]
+                }
+            }
+        },
+        "ten_percent_off_campaign": {
+            "default": true
+        }
+    },
+    "countries": [
+        "ISRAEL",
+        "USA"
+    ]
+}
